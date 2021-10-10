@@ -1,0 +1,17 @@
+.rela__nav {
+    background: white;
+}
+
+.rela__custom-logo {
+    width: 150px;
+    height: 70px;
+}
+
+.rela__navlink {
+    color: black !important;
+}
+
+.rela__navlink.active {
+    color: green !important;
+    font-weight: bold;
+}
