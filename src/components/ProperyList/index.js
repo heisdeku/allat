@@ -4,7 +4,7 @@ import { PropertyCard } from "../PropertyCard";
 import axios from "axios";
 
 export const PropertyList = () => {
-  const [loading, setLoading] = useState();
+  const [ loading, setLoading  ] = useState();
   const [propertyList, setPropertyList] = useState([]);
   const fetchProperties = async () => {
     setLoading(true);
