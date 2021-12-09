@@ -1,7 +1,18 @@
+.card {
+    height: 400px;
+}
+
 .card-body {
     color: black;
 }
 
 .card-body h3 {
     font-weight: 700;
+}
+
+@media (max-width: 500px) {
+    .card,
+    .rela__propertyCard {
+        width: 100%;
+    }
 }

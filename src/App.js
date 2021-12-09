@@ -6,13 +6,10 @@ import { Contact } from './pages/contact';
 import { About } from './pages/about';
 import { Admin } from './pages/admin';
 import { AdminLoginPage } from './pages/admin/LoginPage';
-import { ProperyContextWrapper } from './contexts/PropertyContext/property.context';
-import { ProtectedRoute } from './utils/ProtectedRoute'
-import './App.css';
+import { ProtectedRoute } from './utils/ProtectedRoute';
 
 function App() {
-  return (
-    <ProperyContextWrapper>
+  return (    
       <div className="App">      
       <Navbar />
       <Router>
@@ -25,7 +22,6 @@ function App() {
         </Switch>
       </Router>
     </div>
-    </ProperyContextWrapper>
     
   );
 }
