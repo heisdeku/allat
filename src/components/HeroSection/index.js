@@ -18,13 +18,13 @@ export const HeroSection = () => {
         <HStack
           h="100%"
           d="flex"
-          flexDirection={{ base: "row", lg: "row-reverse" }}
+          flexDirection={{ base: "column", lg: "row-reverse" }}
           alignItems={"center"}
           spacing="5"
-          py="5"
+          py={{ base: "0", md: "5"}}
           overflowX={"hidden"}
         >
-          <Box className="col-10 col-sm-8 col-lg-5">
+          <Box>
             <Image
               src="http://iselllagos.com/wp-content/uploads/2021/02/Hero.png"
               d="block"
@@ -35,14 +35,15 @@ export const HeroSection = () => {
               loading="lazy"
             />
           </Box>
-          <VStack alignItems={"start"}>
+          <VStack  alignItems={"start"}>
             <Heading
               textAlign={"left"}
               fontWeight={"bold"}
-              fontSize="5xl"
+              fontSize={[ "2xl", "5xl"]}
+              mt={[ "8", "0"]}
               mb="3"
               lh="1"
-              w="65%"
+              w={[ "100%", "65%"]}
             >
               Virtual Inspection Just got better
             </Heading>
@@ -58,6 +59,7 @@ export const HeroSection = () => {
               d={{ base: "grid", md: "flex" }}
               justifyContent={{ md: "start " }}
               className="d-grid gap-2 d-md-flex justify-content-md-start"
+              w={[ "100%", "auto"]}
             >
               <Button
                 type="button"

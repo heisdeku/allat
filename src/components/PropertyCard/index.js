@@ -13,8 +13,8 @@ import "./styles.css";
 
 export const PropertyCard = ({ img, name, description, id, ...props }) => {
   return (
-    <Box w={{ sm: "100%", md: "32%" }} my="4" mx="2" pb="4">
-      <Box w="100%" className="card shadow-sm">
+    <Box w={{ sm: "89vw", md: "32%" }} my="4" mx="2" pb="4">
+      <Box w={["89vw", "100%"]} className="card shadow-sm">
         {img ? (
           <Image src={img} w="100%" h="200px" />
         ) : (
@@ -39,16 +39,18 @@ export const PropertyCard = ({ img, name, description, id, ...props }) => {
           <Heading fontSize="lg" fontWeight={"700"}>
             {name}
           </Heading>
-          <Text color="black" className="card-text">
+          <Text color="black" fontSize={"md"} className="card-text">
             {description}
           </Text>
           <HStack
             w="100%"
             justifyContent={"space-between"}
             alignItems="center"
-            className="d-flex justify-content-between align-items-center"
+            flexWrap="wrap"
+            className="justify-content-between"
+            mt="10"
           >
-            <Box w="70%" className="btn-group">
+            <Box w={["100%", "65%"]} className="btn-group">
               <Button
                 color="#007DE8"
                 borderWidth="1px"
@@ -87,8 +89,13 @@ export const PropertyCard = ({ img, name, description, id, ...props }) => {
                 Enquiry About
               </Button>
             </Box>
-            <Text fontSize="sm" fontWeight="bold" className="text-muted">
-              {formatMoney(props.price)}
+            <Text
+              fontSize={["md", "sm"]}
+              fontWeight="bold"
+              mt={{ sm: "10", md: "0"}}
+              className="text-muted"
+            >
+              N{formatMoney(props.price)}
             </Text>
           </HStack>
         </VStack>
