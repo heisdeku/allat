@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
-
-
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 export const AdminContext = createContext();
 
 export const useAdminContext = () => {
@@ -9,6 +8,11 @@ export const useAdminContext = () => {
 
 const AdminContextProvider = ({ children }) => {
   const [ user, setUser ] = useState({})
+  useEffect(() => {
+    if (user) {
+      toast.success('Successfully Logged in!')
+    }
+  }, [user])
   return (
     <AdminContext.Provider value={{ user, setUser}}>
       {children}

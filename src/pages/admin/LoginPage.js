@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -9,11 +9,43 @@ import {
   Text,
   VStack,
   Heading,
-  Button
+  Button,
+  Spinner,
 } from "@chakra-ui/react";
-import { IoMdMail } from 'react-icons/io';
+import { IoMdMail } from "react-icons/io";
+import { useAdminContext } from "../contexts/AdminContext.context";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const AdminLoginPage = () => {
+  const adminContext = useAdminContext();
+  const [loading, setLoading] = useState(false);
+  const [loginDetails, setLoginDetails] = useState({
+    username: "",
+    password: "",
+  });
+  const { setUser } = adminContext;
+
+  const logUserIn = async () => {
+    setLoading(false);
+    try {
+      const response = await axios.post(
+        "https://landxpress.herokuapp.com/api/login/",
+        loginDetails
+      );
+      const token = response.data.token;
+      localStorage.setItem("token_auth", token);
+      setUser({
+        username: loginDetails.username
+      })
+    } catch (e) {
+      setLoading(false);      
+      let message = e?.response?.data?.message || "An error Occurred";
+      toast.error(message);
+    }
+    
+  };
+
   const [passwordShow, setPasswordShow] = React.useState(false);
   return (
     <Box w="100vw" h="100vh" bg={"brand.primaryBG"}>
@@ -70,8 +102,15 @@ export const AdminLoginPage = () => {
                     fontSize="20px"
                     _placeholder={{
                       color: "brand.darkishBrown",
-                    }}    
-                    color="brand.darkishBrown"                                    
+                    }}
+                    value={loginDetails.username}
+                    onChange={(e) =>
+                      setLoginDetails({
+                        ...loginDetails,
+                        username: e.target.value,
+                      })
+                    }
+                    color="brand.darkishBrown"
                     placeholder="zeddcubana"
                     border="1px"
                     borderColor="brand.darkishBrown"
@@ -93,9 +132,7 @@ export const AdminLoginPage = () => {
                   <InputLeftElement
                     pointerEvents="none"
                     py="8"
-                    children={
-                      <IoMdMail color="brand.darkishBrown" />                      
-                    }
+                    children={<IoMdMail color="brand.darkishBrown" />}
                   />
                   <Input
                     w="full"
@@ -108,6 +145,13 @@ export const AdminLoginPage = () => {
                     border="1px"
                     borderColor="brand.darkishBrown"
                     py="8"
+                    value={loginDetails.password}
+                    onChange={(e) =>
+                      setLoginDetails({
+                        ...loginDetails,
+                        password: e.target.value,
+                      })
+                    }
                     type={passwordShow ? "text" : "password"}
                   />
                   <InputRightElement
@@ -141,20 +185,20 @@ export const AdminLoginPage = () => {
               </Box>
               <Button
                 type="button"
-                px="4"   
-                mt="10"                                            
+                px="4"
+                mt="10"
+                onClick={() => logUserIn()}
                 className="btn btn-primary btn-lg px-4 me-md-2"
                 _hover={{
                   background: "transparent",
                   borderColor: "#007DE8",
                   borderWidth: "1px",
-                  color: "#007DE8"
+                  color: "#007DE8",
                 }}
               >
-                Login
+                {loading ? <Spinner color="white" /> : <Text>Login</Text>}
               </Button>
             </VStack>
-            
           </form>
         </Box>
       </Container>

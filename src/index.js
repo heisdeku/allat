@@ -8,6 +8,7 @@ import "./App.css";
 import { theme } from "./styles/theme";
 import AdminContextProvider from "./pages/contexts/AdminContext.context";
 import PropertyContextProvider from "./pages/contexts/PropertyContext.context";
+import { Toaster } from "react-hot-toast";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <AdminContextProvider>
         <PropertyContextProvider>
           <App />
+          <Toaster position="top-right" reverseOrder={true} />
         </PropertyContextProvider>
       </AdminContextProvider>
     </ChakraProvider>
