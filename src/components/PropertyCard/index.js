@@ -5,18 +5,18 @@ import {
   HStack,
   Text,
   VStack,
-  Image,
+  Img,
 } from "@chakra-ui/react";
 import React from "react";
 import { formatMoney } from "../../utils/helper-functions";
 import "./styles.css";
 
-export const PropertyCard = ({ img, name, description, id, ...props }) => {
+export const PropertyCard = ({ img, name, description, openModal, id, ...props }) => {
   return (
     <Box w={{ sm: "89vw", md: "32%" }} my="4" mx="2" pb="4">
       <Box w={["89vw", "100%"]} className="card shadow-sm">
         {img ? (
-          <Image src={img} w="100%" h="200px" />
+          <Img src={img} w="100%" h="200px" />
         ) : (
           <svg
             className="bd-placeholder-img card-img-top"
@@ -62,6 +62,9 @@ export const PropertyCard = ({ img, name, description, id, ...props }) => {
                 _hover={{
                   background: "#007DE8",
                   color: "white",
+                }}
+                onClick={ () => {
+                  openModal(id)
                 }}
               >
                 Check it out

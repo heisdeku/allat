@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,500&display=swap');
+.property-modal {
+    padding: 3% 4%;
+    position: fixed;
+    z-index: 99;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95vw;
+    background: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Roboto';
+    box-shadow: 0px 2px 9px 0px #0000005e;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.property-modal::-webkit-scrollbar {
+    display: none;
+}
+
+.property-modal-isOpen {
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.overlay-property-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #aaa7a71f;
+}
+
+.close-icon {
+    cursor: pointer;
+    top: 0.75rem;
+    right: 0.75rem;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+
+.close-icon:hover ellipse {
+    fill: #D8383A
+}
+
+.property-modal img {
+    width: 100%;
+}
+
+.property-modal-form {
+    background: #FFFFFF;
+    border: 1.8px dashed rgba(0, 0, 0, 0.35);
+    border-radius: 18px;
+    padding: 15px 20px;
+}
+
+.modal-information {
+    margin: 1rem 0;
+}
+
+.modal-information p:nth-of-type(1) {
+    margin-bottom: 15px
+}
+
+@media (min-width: 1200px) {
+    .property-modal {
+        top: 52%;
+        width: 85vw;
+        height: fit-content;
+    }
+    .property-modal-main {
+        display: grid;
+        grid-template-columns: 55% 30%;
+        column-gap: 10%;
+    }
+    .property-methods button {
+        padding: 1rem 1.45rem;
+        height: 45px;
+    }
+}

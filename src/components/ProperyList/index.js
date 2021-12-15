@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { PropertyCard } from "../PropertyCard";
 import {
@@ -11,9 +11,17 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { usePropertyContext } from "../../pages/contexts/PropertyContext.context";
+import PropertyInformation from "../PropertyInformation";
+
 export const PropertyList = () => {
+  const [ propertyId, setPropertyId ] = useState('')
   const propertyContext = usePropertyContext();
-  const { loading, properties } = propertyContext
+  const { loading, modalOpen, setModalOpen, properties } = propertyContext;
+  
+  const openModal = (id) => {
+    setPropertyId(id);
+    setModalOpen(true);
+  }
 
   return (
     <Box>
@@ -49,6 +57,7 @@ export const PropertyList = () => {
                     key={i}
                     img={property?.media[0]?.images}
                     {...property}
+                    openModal={openModal}
                   />
                 );
               })}
@@ -57,6 +66,7 @@ export const PropertyList = () => {
           )}
         </Container>
       </Box>
+      <PropertyInformation modalOpen={modalOpen} propertyId={propertyId} />
     </Box>
   );
 };
