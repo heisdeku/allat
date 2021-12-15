@@ -14,10 +14,12 @@ import {
 } from "@chakra-ui/react";
 import { IoMdMail } from "react-icons/io";
 import { useAdminContext } from "../contexts/AdminContext.context";
+import { useHistory } from 'react-router-dom'
 import axios from "axios";
 import toast from "react-hot-toast";
 
 export const AdminLoginPage = () => {
+  const history = useHistory();
   const adminContext = useAdminContext();
   const [loading, setLoading] = useState(false);
   const [loginDetails, setLoginDetails] = useState({
@@ -27,23 +29,24 @@ export const AdminLoginPage = () => {
   const { setUser } = adminContext;
 
   const logUserIn = async () => {
-    setLoading(false);
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://landxpress.herokuapp.com/api/login/",
         loginDetails
       );
       const token = response.data.token;
-      localStorage.setItem("token_auth", token);
-      setUser({
+      await localStorage.setItem("token_auth", token);
+      await setUser({
         username: loginDetails.username
       })
+      setLoading(false);
+      history.push("/admin")
     } catch (e) {
       setLoading(false);      
-      let message = e?.response?.data?.message || "An error Occurred";
+      let message = e?.response?.data?.non_field_errors[0] || "An error occurred";
       toast.error(message);
-    }
-    
+    } 
   };
 
   const [passwordShow, setPasswordShow] = React.useState(false);
@@ -195,6 +198,7 @@ export const AdminLoginPage = () => {
                   borderWidth: "1px",
                   color: "#007DE8",
                 }}
+                disbaled={loading}
               >
                 {loading ? <Spinner color="white" /> : <Text>Login</Text>}
               </Button>
