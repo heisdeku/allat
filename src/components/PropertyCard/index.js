@@ -98,7 +98,7 @@ export const PropertyCard = ({ img, name, description, openModal, id, ...props }
               mt={{ sm: "10", md: "0"}}
               className="text-muted"
             >
-              N{formatMoney(props.price)}
+              N{formatMoney(props.price || 0)}
             </Text>
           </HStack>
         </VStack>

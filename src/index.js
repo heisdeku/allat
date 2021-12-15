@@ -9,6 +9,8 @@ import AdminContextProvider from "./pages/contexts/AdminContext.context";
 import PropertyContextProvider from "./pages/contexts/PropertyContext.context";
 import { Toaster } from "react-hot-toast";
 import Modal from 'react-modal';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.render(
   <React.StrictMode>

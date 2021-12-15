@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-
+import toast from "react-hot-toast";
 export const PropertyContext = createContext();
 
 export const usePropertyContext = () => {
@@ -25,7 +25,7 @@ const PropertyContextProvider = ({ children }) => {
       setPropertiesLoading(false);
       console.log(e.response);
       let message = e?.response?.data?.message || "An error Occurred";
-      console.log(message);
+      toast.error(message);
     }
   };
 

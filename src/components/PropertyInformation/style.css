@@ -68,8 +68,8 @@
 
 @media (min-width: 1200px) {
     .property-modal {
-        top: 52%;
-        width: 85vw;
+        top: 32%;
+        width: 65vw;
         height: fit-content;
     }
     .property-modal-main {
