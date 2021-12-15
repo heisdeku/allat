@@ -1,58 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./styles.css";
 import { PropertyCard } from "../PropertyCard";
-import axios from "axios";
-
+import {
+  Spinner,
+  Box,
+  Text,
+  Center,
+  Heading,
+  Container,
+  HStack,
+} from "@chakra-ui/react";
+import { usePropertyContext } from "../../pages/contexts/PropertyContext.context";
 export const PropertyList = () => {
-  const [ loading, setLoading  ] = useState();
-  const [propertyList, setPropertyList] = useState([]);
-  const fetchProperties = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        "https://landxpress.herokuapp.com/api/property/"
-      );
-      setPropertyList(response.data);
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-      console.log(e.response);
-      let message = e?.response?.data?.message || "An error Occurred";
-      console.log(message);
-    }
-  };
+  const propertyContext = usePropertyContext();
+  const { loading, properties } = propertyContext
 
-  useEffect(() => {
-    fetchProperties();
-  }, []);
   return (
-    <div className="rela__propertyList">
-      <section class="py-5 bg-light text-center container">
-        <div class="row py-lg-5">
-          <div class="w-75 mx-auto">
-            <h1>Property Listings</h1>
-            <p class="lead text-muted">
+    <Box>
+      <Container maxW="1240px" py="5" bg="#ffffff" textAlign="center">
+        <HStack py={{ md: "5" }}>
+          <Box w="75%" mx="auto">
+            <Heading>Property Listings</Heading>
+            <Text className="lead text-muted">
               These are currently the property that our virtual inspection
               service currently covers
-            </p>
-          </div>
-        </div>
-      </section>
-      <div className="album py-5 mt-4 bg-light">
-        <div className="container">
-          {propertyList.length < 1 ? (
-            <p>No Property Listed yet</p>
+            </Text>
+          </Box>
+        </HStack>
+      </Container>
+      <Box py="5" mt="4" className="album bg-light">
+        <Container id="#properties" maxW="1200px">
+          {loading ? (
+            <Center w="full">
+              <Spinner />
+            </Center>
+          ) : properties.length < 1 ? (
+            <Text>No Property Listed yet</Text>
           ) : (
-            <div className="row row-cols-1 justify-content-between row-cols-sm-2 row-cols-md-4 g-3">
-              {
-                propertyList.map((property) => {
-                return <PropertyCard {...property} />;
-                })
-              }
-            </div>
+            <HStack              
+              flexWrap={"wrap"}
+              overflowX={"hidden"}
+              justifyContent={"space-between"}
+              mb="4"
+            >
+              {properties.map((property, i) => {
+                return (
+                  <PropertyCard
+                    key={i}
+                    img={property?.media[0]?.images}
+                    {...property}
+                  />
+                );
+              })}
+              S
+            </HStack>
           )}
-        </div>
-      </div>
-    </div>
+        </Container>
+      </Box>
+    </Box>
   );
 };

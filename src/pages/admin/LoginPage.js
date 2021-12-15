@@ -1,10 +1,11 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
 
 
 export const AdminLoginPage = () => {
   return (
-    <div>
+    <Container className="container-md mx-auto">
       <p>this is the admin login page</p>
-    </div>
+    </Container>        
   )
 }
