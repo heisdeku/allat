@@ -70,9 +70,11 @@ export const AdminLoginPage = () => {
                     fontSize="20px"
                     _placeholder={{
                       color: "brand.darkishBrown",
-                    }}                                        
+                    }}    
+                    color="brand.darkishBrown"                                    
                     placeholder="zeddcubana"
-                    border="0"
+                    border="1px"
+                    borderColor="brand.darkishBrown"
                     type="text"
                     py="8"
                   />
@@ -92,7 +94,7 @@ export const AdminLoginPage = () => {
                     pointerEvents="none"
                     py="8"
                     children={
-                      <IoMdMail color="brand.textColorTwo" />                      
+                      <IoMdMail color="brand.darkishBrown" />                      
                     }
                   />
                   <Input
@@ -101,8 +103,10 @@ export const AdminLoginPage = () => {
                     _placeholder={{
                       color: "brand.darkishBrown",
                     }}
+                    color="brand.darkishBrown"
                     placeholder="e.g. Zeddpay2021"
-                    border="0"
+                    border="1px"
+                    borderColor="brand.darkishBrown"
                     py="8"
                     type={passwordShow ? "text" : "password"}
                   />
@@ -137,7 +141,8 @@ export const AdminLoginPage = () => {
               </Box>
               <Button
                 type="button"
-                px="4"                                               
+                px="4"   
+                mt="10"                                            
                 className="btn btn-primary btn-lg px-4 me-md-2"
                 _hover={{
                   background: "transparent",
